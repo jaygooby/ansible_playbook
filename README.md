@@ -3,13 +3,13 @@
 Executes ansible-playbook command against an externally mounted set of Ansible playbooks
 
 ```
-docker run --rm -it -v PATH_TO_LOCAL_PLAYBOOKS_DIR:/ansible/playbooks philm/ansible_playbook PLAYBOOK_FILE
+docker run --rm -it -v PATH_TO_LOCAL_PLAYBOOKS_DIR:/ansible/playbooks ottercat/ansible_playbook PLAYBOOK_FILE
 ```
 
 For example, assuming your project's structure follows [best practices](http://docs.ansible.com/ansible/playbooks_best_practices.html#directory-layout), the command to run ansible-playbook from the top-level directory would look like:
 
 ```
-docker run --rm -it -v $(pwd):/ansible/playbooks philm/ansible_playbook site.yml
+docker run --rm -it -v $(pwd):/ansible/playbooks ottercat/ansible_playbook site.yml
 ```
 
 Ansible playbook variables can simply be added after the playbook name.
@@ -23,7 +23,7 @@ docker run --rm -it \
     -v ~/.ssh/id_rsa:/root/.ssh/id_rsa \
     -v ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
     -v $(pwd):/ansible/playbooks \
-    philm/ansible_playbook site.yml
+    ottercat/ansible_playbook site.yml
 ```
 
 ## Ansible Vault
@@ -33,13 +33,13 @@ If you've encrypted any data using [Ansible Vault](http://docs.ansible.com/ansib
 ```
 docker run --rm -it -v $(pwd):/ansible/playbooks \
     -v ~/.vault_pass.txt:/root/.vault_pass.txt \
-    philm/ansible_playbook site.yml --vault-password-file /root/.vault_pass.txt
+    ottercat/ansible_playbook site.yml --vault-password-file /root/.vault_pass.txt
 ```                    
 
 Note: the Ansible Vault executable is embedded in this image. To use it, specify a different entrypoint:
 
 ```
-docker run --rm -it -v $(pwd):/ansible/playbooks --entrypoint ansible-vault philm/ansible_playbook encrypt FILENAME
+docker run --rm -it -v $(pwd):/ansible/playbooks --entrypoint ansible-vault ottercat/ansible_playbook encrypt FILENAME
 ```
 
 ## Testing Playbooks - Ansible Target Container
@@ -71,7 +71,7 @@ docker run --rm -it \
     -v ~/.ssh/id_rsa:/root/.ssh/id_rsa \
     -v ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
     -v $(pwd):/ansible/playbooks \
-    philm/ansible_playbook tests.yml -i inventory
+    ottercat/ansible_playbook tests.yml -i inventory
 ```
 
 Note: the SSH key used above should match the one used to run Ansible Target.
