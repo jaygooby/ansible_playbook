@@ -22,4 +22,3 @@ services:
       - ~/.ssh/id_rsa:/root/.ssh/id_rsa
       - ~/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub
       - .:/ansible/playbooks
-    command: [ "-i", "inventory", "remote.yml" ]
