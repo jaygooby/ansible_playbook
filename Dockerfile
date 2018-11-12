@@ -1,14 +1,13 @@
-FROM python:alpine
+FROM python:3-alpine
 
-RUN apk update && \
-    apk add ansible \
-            openssh-client \
-            curl && \
-    pip3 install -U setuptools && \
-    pip3 install -U pylint && \
+RUN apk add --no-cache ansible \
+                       openssh-client \
+                       curl && \
+    pip3 install --no-cache -U setuptools && \
+    pip3 install --no-cache -U pylint && \
     rm -rf /var/cache/apk/* && \
     ln -s /usr/local/bin/python /usr/bin/python
-            
+
 RUN mkdir /etc/ansible/ /ansible
 RUN echo "[local]" >> /etc/ansible/hosts && \
     echo "localhost" >> /etc/ansible/hosts
